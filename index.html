@@ -4,41 +4,52 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Video dedicado</title>
+  
 </head>
 <body>
-  <h1>Hey, me alegra que estés aquí </h1>
-  <p>Por ello te quiero dedicar esta canción.</p>
+  <h1>Hey, me alegra que estés aquí!!</h1>
+  <p>Por ello te quiero dedicar esta canción 💙</p>
 
-  <!-- 🔹 BOTÓN PARA IR AL VIDEO -->
-  <a class="boton" href="https://m.youtube.com/watch?v=pbm1Nzi23fM&t=630s&pp=2AH2BJACAdIHCQkbAaO1ajebQw%3D%3D" target="_blank">Ver video en YouTube 🎵</a>
+  <!-- Botón para mostrar el video -->
+  <a href="#" id="verVideo" class="boton">🎬 Ver video</a>
 
   <!-- Aquí se insertará el video embebido -->
   <div id="player"></div>
 
   <!-- API de YouTube -->
   <script src="https://www.youtube.com/iframe_api"></script>
+
   <script>
-    // ID del video de YouTube (solo el ID, no toda la URL)
-    const VIDEO_ID = "pbm1Nzi23fM"; 
-    // URL a donde redirigir cuando termina
-    const NEXT_PAGE = "https://batzielectronics.github.io/Entrenamiento-Inteligente/";
+    const VIDEO_ID = "pbm1Nzi23fM"; // ID del video
+    const NEXT_PAGE = "https://batzielectronics.github.io/Entrenamiento-Inteligente/"; // siguiente página
 
     let player;
+
+    // Crea el reproductor cuando la API está lista
     function onYouTubeIframeAPIReady() {
       player = new YT.Player('player', {
+        height: '315',
+        width: '560',
         videoId: VIDEO_ID,
         playerVars: { autoplay: 0, controls: 1 },
-        events: {
-          'onStateChange': onPlayerStateChange
-        }
+        events: { 'onStateChange': onPlayerStateChange }
       });
     }
 
+    // Detecta cuando termina el video
     function onPlayerStateChange(event) {
       if (event.data === YT.PlayerState.ENDED) {
-        window.location.href = NEXT_PAGE;
+        window.location.href = NEXT_PAGE; // redirige al terminar
       }
     }
+
+    // Mostrar el video al pulsar el botón
+    document.getElementById('verVideo').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('player').style.display = 'block';
+      this.style.display = 'none'; // oculta el botón
+      player.playVideo(); // inicia el video
+    });
   </script>
 </body>
 </html>
