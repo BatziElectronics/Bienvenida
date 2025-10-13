@@ -1,19 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<link rel="stylesheet" href="estilo.css">
-<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-<title>Cuestionario</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video dedicado</title>
 </head>
 <body>
-<div class="contenedor">
-<h1>Hey, me alegra que estes aquí!!</h1>
-<p>Por ello te quiero dedicar esta canción, espero y te guste 👀😁</p>
-</div>
-<a href="https://www.youtube.com/watch?v=yv74je0EJz0">Hazme click</a>
-<p>Sabes, de que me serviría tenerlo todo en esta vida si no te tengo a ti para compartirlo, <br>
-seria como no tener nada. ¡Te quiero!</p>
+  <h1>Hey, me alegra que estés aquí!!</h1>
+  <p>Por ello te quiero dedicar esta canción, espero y te guste.</p>
+
+  <div id="player"></div>
+  <!-- API de YouTube -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script>
+    // ID del video de YouTube
+    const VIDEO_ID = "https://m.youtube.com/watch?v=pbm1Nzi23fM&t=630s&pp=2AH2BJACAdIHCQkbAaO1ajebQw%3D%3D"; // reemplaza con tu video
+    // URL a donde redirigir cuando termina
+    const NEXT_PAGE = "https://batzielectronics.github.io/Entrenamiento-Inteligente/"; // cambia por tu URL destino
+
+    let player;
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('player', {
+        videoId: VIDEO_ID,
+        playerVars: { autoplay: 1, controls: 1 },
+        events: {
+          'onStateChange': onPlayerStateChange
+        }
+      });
+    }
+
+    function onPlayerStateChange(event) {
+      if (event.data === YT.PlayerState.ENDED) {
+        window.location.href = NEXT_PAGE; // redirige al terminar
+      }
+    }
+  </script>
 </body>
 </html>
